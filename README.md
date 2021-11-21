@@ -3,7 +3,7 @@
 
 EasyRoutes allows you to easily draw routes through the google maps address api.
 
-Note: You need to generate an API key from the google console with the directions API.
+Note: You need to generate an API key from the google console with the directions API and add INTERNET permission in manifest.
 
 ## Setup
 Gradle:
@@ -33,7 +33,15 @@ Caused by: org.gradle.api.InvalidUserCodeException: Build was configured to pref
 
 modify your settings.gradle to:
 ```
-repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
 Otherwise you have to use library directly in your project.
