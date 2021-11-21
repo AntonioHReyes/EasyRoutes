@@ -21,7 +21,7 @@ Add the dependency in your app build.gradle.
 
 ```gradle
 dependencies {
-	        implementation 'com.github.AntonioHReyes:EasyRoutes:1.0.8'
+	        implementation 'com.github.AntonioHReyes:EasyRoutes:1.0.9'
 	}
 ```
 
@@ -139,22 +139,35 @@ val routeDrawerWithCustomPolyline = EasyRoutesDrawer.Builder(mMap, customPolylin
 finally use a map extension function fo pain the route.
 ```kotlin
 mMap.drawRoute(
-            context = this@MapsActivity,
-            easyRoutesDirections = placeDirections,
-            routeDrawer = routeDrawer,
-            markersListCallback = {markers -> markersList.addAll(markers) }
-        ){ legs ->
-            legs?.forEach {
-                Log.d("Point startAddress:", it?.startAddress.toString())
-                Log.d("Point endAddress:", it?.endAddress.toString())
-                Log.d("Distance:", it?.distance.toString())
-                Log.d("Duration:", it?.duration.toString())
-            }
-        }
+    context = this@MapsActivity,
+    easyRoutesDirections = placeDirections,
+    routeDrawer = routeDrawer,
+    markersListCallback = {markers -> markersList.addAll(markers) },
+    googleMapsLink = { url -> Log.d("GoogleLink", url)}
+){ legs ->
+    legs?.forEach {
+        Log.d("Point startAddress:", it?.startAddress.toString())
+        Log.d("Point endAddress:", it?.endAddress.toString())
+        Log.d("Distance:", it?.distance.toString())
+        Log.d("Duration:", it?.duration.toString())
+    }
+}
 ```
 
 you can use ```markersListCallback``` to get the origin a destination markers painted by default.
+you can use ```googleMapsLink``` to get the url of google maps with the route.
 you can use ```legsCallback``` to get the distance and duration of points in the route.
+
+additional you can use ```getGoogleMapsLink``` to get a url of google maps with the route:
+
+```kotlin
+binding.mapsDirections.setOnClickListener { 
+    val url = getGoogleMapsLink(placeDirections) //EasyRouteDirections instance like parameter
+
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    startActivity(intent) //Open google maps native app
+}
+```
 
 you can remove the route and markers with:
 
@@ -170,6 +183,7 @@ markersList.forEach {
 Screnshot
 ---
 ![image](screenshots/easyroute.png)
+![image](screenshots/googlemaps.png)
 
 
 Buy me a coffee

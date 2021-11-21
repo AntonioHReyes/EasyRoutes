@@ -21,6 +21,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Extension function to draw the route
+ *
+ * @param context
+ * @param easyRoutesDirections
+ * @param routeDrawer
+ * @param markersListCallback
+ * @param googleMapsLink
+ * @param legsCallback
+ */
 fun GoogleMap.drawRoute(
     context: Context,
     easyRoutesDirections: EasyRoutesDirections,
@@ -28,6 +38,7 @@ fun GoogleMap.drawRoute(
         .pathWidth(12f)
         .build(),
     markersListCallback: ((markers: List<Marker>) -> Unit)? = null,
+    googleMapsLink: ((String) -> Unit)? = null,
     legsCallback: ((legs: List<LegsItem?>?) -> Unit)? = null
 ) {
 
@@ -42,10 +53,10 @@ fun GoogleMap.drawRoute(
 
                     routeDrawer.drawPath(directions)
 
-                    if(easyRoutesDirections.showDefaultMarkers){
+                    if (easyRoutesDirections.showDefaultMarkers) {
                         val markers = this@drawRoute.handleLegsDirections(context, routes)
 
-                        if(markersListCallback != null){
+                        if (markersListCallback != null) {
                             markersListCallback(markers)
                         }
                     }
@@ -60,12 +71,60 @@ fun GoogleMap.drawRoute(
                 }
             }
 
+            if(googleMapsLink != null){
+                googleMapsLink(getGoogleMapsLink(easyRoutesDirections))
+            }
+
 
         } catch (e: Exception) {
             Log.e("EasyRoutesError", "${e.message}")
         }
 
     }
+}
+
+fun getGoogleMapsLink(easyRoutesDirections: EasyRoutesDirections): String {
+    val (
+        _,
+        originLatLng,
+        originPlace,
+        destinationLatLng,
+        destinationPlace,
+        waypointsLatLng,
+        waypointsPlaces
+    ) = easyRoutesDirections
+
+    var url = "https://www.google.com.mx/maps/dir/"
+
+    if(originLatLng != null){
+        url += "${originLatLng.latitude},${originLatLng.longitude}/"
+    }
+
+    if(originPlace != null){
+        url += "${originPlace}/"
+    }
+
+    for (waypoint in waypointsLatLng) {
+        waypoint.let {
+            url += "${waypoint.latitude},${waypoint.longitude}/"
+        }
+    }
+
+    for (waypoint in waypointsPlaces) {
+        waypoint.let {
+            url += "${waypoint}/"
+        }
+    }
+
+    if(destinationLatLng != null){
+        url += "${destinationLatLng.latitude},${destinationLatLng.longitude}"
+    }
+
+    if(destinationPlace != null){
+        url += "${destinationPlace}"
+    }
+
+    return url
 }
 
 private fun GoogleMap.handleLegsDirections(

@@ -1,6 +1,8 @@
 package com.example.easyroutes
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +22,7 @@ import com.tonyakitori.inc.easyroutes.EasyRoutesDirections
 import com.tonyakitori.inc.easyroutes.EasyRoutesDrawer
 import com.tonyakitori.inc.easyroutes.enums.TransportationMode
 import com.tonyakitori.inc.easyroutes.extensions.drawRoute
+import com.tonyakitori.inc.easyroutes.extensions.getGoogleMapsLink
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -72,7 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 "Santiago de Queretaro",
                 "Aguascalientes"
             ),
-            showDefaultMarkers= false,
+            showDefaultMarkers= true,
             transportationMode = TransportationMode.WALKING
         )
 
@@ -107,7 +110,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             context = this@MapsActivity,
             easyRoutesDirections = placeDirections,
             routeDrawer = routeDrawer,
-            markersListCallback = {markers -> markersList.addAll(markers) }
+            markersListCallback = {markers -> markersList.addAll(markers) },
+            googleMapsLink = { url -> Log.d("GoogleLink", url)}
         ){ legs ->
             legs?.forEach {
                 Log.d("Point startAddress:", it?.startAddress.toString())
@@ -115,6 +119,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Log.d("Distance:", it?.distance.toString())
                 Log.d("Duration:", it?.duration.toString())
             }
+        }
+
+        binding.mapsDirections.setOnClickListener {
+            val url = getGoogleMapsLink(placeDirections)
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
 
 
