@@ -1,5 +1,5 @@
 # EasyRoutes
-[![](https://jitpack.io/v/malikdawar/drawroute.svg)](https://jitpack.io/#AntonioHReyes/EasyRoutes)
+[![](https://jitpack.io/v/AntonioHReyes/EasyRoutes.svg)](https://jitpack.io/#AntonioHReyes/EasyRoutes)
 
 EasyRoutes allows you to easily draw routes through the google maps address api.
 
