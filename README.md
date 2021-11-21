@@ -1,4 +1,6 @@
 # EasyRoutes
+[![](https://jitpack.io/v/malikdawar/drawroute.svg)](https://jitpack.io/#AntonioHReyes/EasyRoutes)
+
 EasyRoutes allows you to easily draw routes through the google maps address api.
 
 Note: You need to generate an API key from the google console with the directions API.
@@ -156,6 +158,11 @@ markersList.forEach {
     it.remove()
 }
 ```
+
+Screnshot
+---
+![image](screenshots/easyroute.png)
+
 
 Buy me a coffee
 ---
