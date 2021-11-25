@@ -21,7 +21,7 @@ Add the dependency in your app build.gradle.
 
 ```gradle
 dependencies {
-	        implementation 'com.github.AntonioHReyes:EasyRoutes:1.0.9'
+	        implementation 'com.github.AntonioHReyes:EasyRoutes:$version'
 	}
 ```
 
