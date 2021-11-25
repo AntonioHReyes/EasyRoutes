@@ -54,6 +54,8 @@ class EasyRoutesDrawer private constructor(builder: Builder) {
     }
 
     private fun pathWithPrecision(directions: Directions): PolylineOptions{
+        polylineOptions?.points?.clear()
+
         val polyline = polylineOptions ?: setUpPolyline()
 
         for(route in directions.routes ?: listOf()){
@@ -75,6 +77,8 @@ class EasyRoutesDrawer private constructor(builder: Builder) {
     }
 
     private fun pathWithoutPrecision(directions: Directions): PolylineOptions{
+        polylineOptions?.points?.clear()
+
         val polyline = polylineOptions ?: setUpPolyline()
 
         for(route in directions.routes ?: listOf()){

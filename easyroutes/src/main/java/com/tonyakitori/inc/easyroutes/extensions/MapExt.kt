@@ -60,22 +60,18 @@ fun GoogleMap.drawRoute(
                             markersListCallback(markers)
                         }
                     }
-                }
-            }
 
-            if (routes.isNullOrEmpty().not()) {
-                if (routes?.get(0)?.legs.isNullOrEmpty().not()) {
-                    if (legsCallback != null) {
-                        legsCallback(routes?.get(0)?.legs)
+                    if (routes?.get(0)?.legs.isNullOrEmpty().not()) {
+                        if (legsCallback != null) {
+                            legsCallback(routes?.get(0)?.legs)
+                        }
+                    }
+
+                    if(googleMapsLink != null){
+                        googleMapsLink(getGoogleMapsLink(easyRoutesDirections))
                     }
                 }
             }
-
-            if(googleMapsLink != null){
-                googleMapsLink(getGoogleMapsLink(easyRoutesDirections))
-            }
-
-
         } catch (e: Exception) {
             Log.e("EasyRoutesError", "${e.message}")
         }

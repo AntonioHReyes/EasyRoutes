@@ -8,5 +8,5 @@ data class Distance(
 	val text: String? = null,
 
 	@field:SerializedName("value")
-	val value: Int? = null
+	val value: Long? = null
 )
