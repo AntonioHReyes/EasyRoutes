@@ -1,5 +1,6 @@
 # EasyRoutes
 [![](https://jitpack.io/v/AntonioHReyes/EasyRoutes.svg)](https://jitpack.io/#AntonioHReyes/EasyRoutes)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EasyRoutes-green.svg?style=flat)](https://android-arsenal.com/details/1/8275)
 
 EasyRoutes allows you to easily draw routes through the google maps address api.
 
