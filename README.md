@@ -186,12 +186,7 @@ Screnshot
 ![image](screenshots/easyroute.png)
 ![image](screenshots/googlemaps.png)
 
-
-Buy me a coffee
----
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=6RV93BSM8E364)
-
+[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://buymeacoffee.com/anhr9728w)
 
 Developed By
 ------------
